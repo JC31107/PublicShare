@@ -1,0 +1,81 @@
+Declare @RunType as int;
+Declare @RunStart as date;
+Declare @RunEnd as date;
+Declare @Anon as int;
+Declare @RunDays as int;
+Declare @Locale as int;
+
+-- ***********************************************
+-- ********** Setttings for dynamic run **********
+
+-- RunType specifies if we follow a date range or previous day
+-- Vaule of 1 is follow date range, specified below
+-- Value of 2 will run previous day
+-- Value of 3 will run previous x number of days, specified below
+Set @RunType = 3;
+
+-- If we are using a RunType of 1 the below dates must be set
+Set @Runstart = '10/01/2018';
+Set @RunEnd  = '10/09/2018';
+
+-- If RunType is 3 a value must be set below for how many of the previous days should be pulled
+Set @RunDays = 20;
+
+-- Set value of 1 for identified access with EMPID
+-- Set value of 2 for anonymized data with SWH GUID
+Set @Anon = 1;
+
+-- Locale Settings
+-- Value of 1 pulls US sites only
+-- Value of 2 pulls international
+-- Value of 3 pulls all employees
+Set @Locale = 3;
+
+-- ********** End of settings section **********
+-- *********************************************
+use [SWHSystemJournal]
+--Run query to get only unique reads of the day
+select [Door Name],[LocalDate], [LocalTime], [UTCDate], [UTCTime], 
+CASE 
+When (@Anon = 1 and [EMPID] <> '' and [EMPID] is not null) Then [EMPID]
+When (@Anon = 1 and ([EMPID] = '' or [EMPID] is null)) Then convert(varchar(255),[GUID])
+When @Anon = 2 Then convert(varchar(255),[GUID])
+Else NULL
+END As [Identifier], 
+[MU],
+@@ServerName as [SQL Server]
+from
+(
+--Run query to get card transaction data
+select a.MessageType, a.secondaryobjectname as [Door Name],
+convert(date,a.messageutc) as UTCDate,
+convert(time(0), a.MessageUTC) as UTCTime, 
+cast(dateadd(mi,(-1 * messagelocaleoffset),messageutc) as date) as LocalDate,
+cast(dateadd(mi,(-1 * messagelocaleoffset),messageutc) as time (0)) as LocalTime,
+a.PrimaryObjectName, 
+b.FirstName, 
+b.LastName, 
+b.guid,
+b.Text4 as EMPID,
+b.Int5 as MU,
+row_number() over (partition by  a.PrimaryObjectidentity, a.secondaryobjectname, convert(date,a.messageutc) order by convert(datetime,a.messageutc) desc) as RowID
+from SWHSystemJournal.dbo.JournalLog a
+inner join [ACVSCORE].[Access].[Personnel] as b on a.PrimaryObjectIdentity = b.guid
+inner join ACVSCORE.Access.Door as d on a.SecondaryObjectIdentity = d.GUID
+inner join ACVSCORE.Access.DoorUDF as e on d.ObjectID = e.ObjectID
+where MessageType = 'CardAdmitted' and (
+(@RunType = 1 and convert(date,a.messageutc) between convert(date, @RunStart) and convert(date, @RunEnd)) or
+(@RunType = 2 and convert(date,dateadd(mi,(-1 * messagelocaleoffset),messageutc)) = convert(date,dateadd(day,-1,getdate()))) or
+(@RunType = 3 and convert(date,dateadd(mi,(-1 * messagelocaleoffset),messageutc)) between convert(date,dateadd(day,(-1 * @RunDays) - 1,getdate())) and convert(date,dateadd(day,- 1,getdate())))
+)
+and (
+--Conditions for anonymous user data
+-- Pull identifiable data if EMPID OR MU are not empty  ** If EMPID is empty then we supply the GUID via the case statement above
+(@Anon = 1 and ((b.text4 <> '' and b.Text4 is not null) or (b.Int5 <> 0 and b.int5 is not null))) or 
+-- Pull anonymous data if the MU isn't empty
+(@Anon = 2 and b.Int5 <> 0 and b.int5 is not null)
+)
+and ((@Locale = 1 and b.Text23 like '[0-9]%') or (@Locale = 2 and b.Text23 like '[a-Z]%') or (@Locale = 3))
+) f
+where rowID = '1'
+order by UTCDate, UTCTime
