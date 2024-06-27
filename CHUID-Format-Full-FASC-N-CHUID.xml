@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<CrossFire culture-info="en-US" platform-version="2.60.18" product-version="2.60.18">
+  <SoftwareHouse.NextGen.Common.SecurityObjects.CHUIDFormat ImportMode="Default">
+    <Name>Full FASC-N CHUID Format</Name>
+    <Description>200 bit CHUID Format used by TWIC/PIV II Cards</Description>
+    <CHUIDFormatType>Extended</CHUIDFormatType>
+    <CHUIDLength>32</CHUIDLength>
+    <Enabled>True</Enabled>
+    <EnableSmartID>False</EnableSmartID>
+    <FormatSpecifier>{15:D52}{14:D1}{13:D1}{12:D10}{6:D1}{5:D1}{4:D4}{3:D4}{0:D6}</FormatSpecifier>
+    <PartitionID>1</PartitionID>
+    <PartitionKey>$$Default$$</PartitionKey>
+    <Protected>False</Protected>
+    <SpecialEditingRequired>False</SpecialEditingRequired>
+    <Template>False</Template>
+  </SoftwareHouse.NextGen.Common.SecurityObjects.CHUIDFormat>
+</CrossFire>

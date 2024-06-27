@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<CrossFire culture-info="en-US" platform-version="2.60.18" product-version="2.60.18">
+  <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormat ImportMode="Default">
+    <Name>Government 200-bit FASC-N</Name>  
+    <CardTechnology>Magnetic</CardTechnology>
+    <CardUsage>Access</CardUsage>
+    <CHUIDFormatID>5000</CHUIDFormatID>
+    <ControllerType>10</ControllerType>
+    <Length>40</Length>
+    <ObjectID>5020</ObjectID>
+    <PartitionID>1</PartitionID>
+    <PartitionKey>$$Default$$</PartitionKey>
+    <Proprietary>False</Proprietary>
+    <Protected>False</Protected>
+    <ReversibleRead>ReverseReadGood</ReversibleRead>
+    <Template>False</Template>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>AgencyCode</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>4</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>6</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>2</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>SystemCode</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>4</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>10</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>7</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>Unknown</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>6</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>0</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>12</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>CredentialSeries</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>1</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>14</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>19</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>CredentialIssue</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>1</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>15</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>21</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>PersonnelIdentifier</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>10</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>16</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>23</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>OrganizationalCategory</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>1</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>27</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>33</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>OrganizationalIdentifier</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>4</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>28</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>34</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+    <SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField ImportMode="Default">
+      <CardFormatID>5020</CardFormatID>
+      <Complement>False</Complement>
+      <CredentialFieldType>AssociationCategory</CredentialFieldType>
+      <EvenMasked>False</EvenMasked>
+      <FieldData />
+      <FieldLength>1</FieldLength>
+      <FieldType>CardNumber</FieldType>
+      <Offset>26</Offset>
+      <ParityLength>0</ParityLength>
+      <ParityStart>0</ParityStart>
+      <PartitionID>1</PartitionID>
+      <Protected>False</Protected>
+      <SequenceNumber>0</SequenceNumber>
+      <StartPosition>38</StartPosition>
+      <Template>False</Template>
+      <Transform>Unknown</Transform>
+    </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormatField>
+  </SoftwareHouse.NextGen.Common.SecurityObjects.CardFormat>
+</CrossFire>
