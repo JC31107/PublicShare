@@ -1,4 +1,4 @@
-﻿# ==============================
+# ==============================
 # Configurable parameters
 # ==============================
 $SqlServer  = "usdf11v0842"
@@ -11,41 +11,63 @@ function Get-ApplicationServerIP {
     # SQL Query
     $Query = "select MachineName from ACVSCore.dbo.ApplicationServer"
 
+    # Connection String (Windows Integrated Auth)
+    $ConnectionString = "Server=$SQLServer;Database=ACVSCore;Integrated Security=True;"
+
+    $MachineNames = @()
+
     try {
-        # Run SQL Query
-        $Servers = Invoke-Sqlcmd -ServerInstance $SQLServer -Query $Query -ErrorAction Stop
+        # Create SQL Connection
+        $Connection = New-Object System.Data.SqlClient.SqlConnection
+        $Connection.ConnectionString = $ConnectionString
+        $Connection.Open()
+
+        # Create SQL Command
+        $Command = $Connection.CreateCommand()
+        $Command.CommandText = $Query
+
+        # Execute Reader
+        $Reader = $Command.ExecuteReader()
+
+        while ($Reader.Read()) {
+            $MachineNames += $Reader["MachineName"]
+        }
+
+        $Reader.Close()
+        $Connection.Close()
     }
     catch {
-        Write-Error "Failed to query SQL Server [$SQLServer]: $_"
+        Write-Error "SQL Query Failed on [$SQLServer]: $_"
         return
     }
 
-    $Results = foreach ($Row in $Servers) {
-        $MachineName = $Row.MachineName
-        if ([string]::IsNullOrWhiteSpace($MachineName)) {
+    # Resolve DNS for each machine
+    $Results = foreach ($Machine in $MachineNames) {
+
+        if ([string]::IsNullOrWhiteSpace($Machine)) {
             continue
         }
 
         try {
-            # DNS Lookup
-            $IP = (Resolve-DnsName -Name $MachineName -ErrorAction Stop |
-                   Where-Object {$_.Type -eq "A"} |
+            $IP = (Resolve-DnsName -Name $Machine -ErrorAction Stop |
+                   Where-Object { $_.Type -eq "A" } |
                    Select-Object -First 1 -ExpandProperty IPAddress)
 
             [PSCustomObject]@{
-                MachineName = $MachineName
+                MachineName = $Machine
                 IPAddress   = $IP
                 Status      = "Resolved"
             }
         }
         catch {
             [PSCustomObject]@{
-                MachineName = $MachineName
+                MachineName = $Machine
                 IPAddress   = $null
                 Status      = "DNS Lookup Failed"
             }
         }
     }
+
     return $Results
 }
 
